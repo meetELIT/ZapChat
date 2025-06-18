@@ -2,11 +2,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
   GestureResponderEvent,
 } from 'react-native';
 import React from 'react';
-import {responsiveHeight} from 'react-native-responsive-dimensions';
+
+import {hp} from '../../theme/Materic';
+import {Colors} from '../../theme/Colors';
 
 interface CommonButtonProps {
   submit: (event: GestureResponderEvent) => void;
@@ -34,8 +35,8 @@ const styles = StyleSheet.create({
   nextButton: {
     width: '85%',
     borderRadius: 100,
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(2),
+    backgroundColor: Colors.white,
+    padding: hp(2),
     alignItems: 'center',
     alignSelf: 'center',
   },

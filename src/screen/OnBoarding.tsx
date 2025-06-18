@@ -1,22 +1,11 @@
-import {
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
+import {View, Image, Text, StyleSheet, FlatList} from 'react-native';
 import {Images} from '../../assets';
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-//import CommonButton from '../components/CommonButton';
-import {
-  responsiveFontSize,
-  responsiveHeight,
-  responsiveWidth,
-} from 'react-native-responsive-dimensions';
-import Responsive from '../Common/Dimension/Responsive';
 import NextButton from '../Common/Component/NextButton';
+import {fontSize, hp, wp} from '../theme/Materic';
+import {Colors} from '../theme/Colors';
+import Strings from '../theme/String';
 
 interface Message {
   id: string;
@@ -28,28 +17,27 @@ interface Message {
 const messages: Message[] = [
   {
     id: '1',
-    text: 'Connect people around \n the world',
+    text: Strings.Onboarding1_title,
     image: Images.OnBoarding1,
-    sub_title: 'Never miss those precious moments.',
+    sub_title: Strings.Onboarding1_subtitle,
   },
   {
     id: '2',
-    text: 'Don’t miss out on what your friends are up to',
+    text: Strings.Onboarding2_title,
     image: Images.OnBoarding2,
-    sub_title: 'Never miss those precious moments.',
+    sub_title: Strings.Onboarding2_subtitle,
   },
   {
     id: '3',
-    text: 'Chatting, Made Simple.',
+    text: Strings.Onboarding3_title,
     image: Images.OnBoarding3,
-    sub_title: 'Communicate with family and friends quickly \nand easily.',
+    sub_title: Strings.Onboarding3_subtitle,
   },
 ];
 
 const OnBoarding: React.FC = () => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState<number>(0);
   const navigation = useNavigation();
-  console.log(currentMessageIndex);
 
   const handleNext = () => {
     if (currentMessageIndex < messages.length - 1) {
@@ -60,7 +48,6 @@ const OnBoarding: React.FC = () => {
       });
     }
   };
-
   return (
     <View style={styles.container} accessible={true}>
       <View style={styles.image}></View>
@@ -70,15 +57,13 @@ const OnBoarding: React.FC = () => {
         renderItem={({item}) => (
           <View>
             <Image source={item.image} style={styles.image} />
-
             <Text style={styles.title}>{item.text}</Text>
             <Text style={styles.subTitle}>{item.sub_title}</Text>
           </View>
         )}
       />
-
       <View style={styles.nextButton}>
-        <NextButton submit={handleNext} text="Next" />
+        <NextButton submit={handleNext} text={Strings.next} />
       </View>
     </View>
   );
@@ -87,59 +72,46 @@ const OnBoarding: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: Colors.white,
   },
-
-  // imgContainer: {
-  //   //alignItems: 'center',
-  // },
-
   image: {
-    width: responsiveWidth(100),
-    marginTop: responsiveHeight(7),
+    width: '100%',
+    resizeMode: 'stretch',
+    marginTop: hp(7),
   },
   imageOnboarding4: {
-    width: responsiveWidth(100),
-    height: responsiveHeight(60),
+    width: wp(100),
     resizeMode: 'stretch',
   },
   nextButton: {
-    width: responsiveWidth(85),
-    //height: responsiveHeight(6),
+    width: wp(85),
     borderRadius: 40,
     borderWidth: 0.5,
-    backgroundColor: '#ffffff',
-    marginBottom: responsiveHeight(10),
+    backgroundColor: Colors.white,
+    marginBottom: hp(10),
     alignSelf: 'center',
     justifyContent: 'center',
   },
   signinButton: {
-    // width: responsiveWidth(85),
-    // height: responsiveHeight(6),
     borderRadius: 40,
     borderWidth: 0.5,
-    backgroundColor: '#ffffff',
-    marginBottom: responsiveHeight(10),
+    backgroundColor: Colors.white,
+    marginBottom: hp(10),
     alignSelf: 'center',
     justifyContent: 'center',
   },
   title: {
     fontFamily: 'encode-sans-expanded',
-    marginTop: responsiveHeight(2),
-    paddingHorizontal: responsiveWidth(2),
-    fontSize: responsiveFontSize(3),
+    marginTop: hp(2),
+    paddingHorizontal: wp(2),
+    fontSize: fontSize(20),
     textAlign: 'center',
-    //fontFamily: 'EncodeSansExpanded',
     fontWeight: 'bold',
   },
   subTitle: {
-    color: '#ccc',
-    fontSize: responsiveFontSize(2),
+    color: Colors.grey2,
+    fontSize: fontSize(16),
     textAlign: 'center',
-  },
-  nextText: {
-    fontSize: responsiveFontSize(2),
-    fontWeight: 'bold',
   },
 });
 
